@@ -1,0 +1,263 @@
+.rw-blocks-slideshow.abs {
+	.slide {
+		&.act {
+			transform: scale(1);
+			transform-origin: bottom center;
+		}
+
+		&.bk.act {
+			transform-origin: top center;
+		}
+
+		&.bk {
+			transform-origin: bottom center;
+		}
+	}
+
+	.slide-ctrl {
+		display: flex;
+		position: absolute;
+		bottom: 0;
+		width: 100%;
+		padding: 5px 0;
+		margin: 0 auto;
+		justify-content: space-evenly;
+		height: 100px;
+		align-items: center;
+	}
+
+	.slide-dots {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		list-style: none;
+		padding: 0;
+		margin: 0;
+
+		.dot {
+			width: 30px;
+			height: 30px;
+			background-color: black;
+			/* Dot color */
+			border-radius: 50%;
+
+			border: 1px gray solid;
+			color: black;
+			display: block;
+
+			&:not(:last-child) {
+				margin-right: 49px;
+			}
+
+			/* &:first-child::before, */
+			&:not(:last-child)::after {
+				content: "";
+				width: 50px;
+				height: 1px;
+				background-color: white;
+				position: relative;
+				display: block;
+				top: 50%;
+				left: 100%;
+				transform: translateY(-34%);
+			}
+
+			&:first-child::before {
+				background-color: none;
+				left: initial;
+				right: 100%;
+				transform: translateY(-34%);
+			}
+
+			&.act {
+				background-color: transparent;
+				filter: drop-shadow(0px 1px 1px red);
+			}
+
+			&.done {
+				border-color: var(--wp--preset--color--contrast);
+				background-color: var(--wp--preset--color--contrast);
+
+				&:after {
+					height: 2px;
+				}
+			}
+		}
+	}
+
+	.next,
+	.prev {
+		padding: 14px;
+		width: 30px;
+		height: 30px;
+
+		&:hover {
+			background-color: var(--wp--preset--color--base);
+			border-radius: 100%;
+		}
+	}
+
+	.next:hover {
+		filter: drop-shadow(-2px 0px 2px var(--wp--preset--color--contrast));
+	}
+
+	.prev:hover {
+		filter: drop-shadow(2px 0px 2px var(--wp--preset--color--contrast));
+	}
+}
+
+.slide1 {
+	color: white;
+	transform: scale(0);
+	margin: 0 auto;
+	transition: transform 1s;
+	width: 100%;
+	height: 100%;
+	transform-origin: top center;
+	position: absolute;
+	top: 0;
+	left: 0;
+
+	.slide-content {
+		height: calc(100% - 100px);
+		width: 100%;
+	}
+
+	.timeline-content>* {
+		max-width: 100%;
+		max-height: 100%;
+		height: 100%;
+		width: 100%;
+		box-sizing: border-box;
+		/* Ensure padding and borders are included */
+		flex: 1 1 auto;
+		/* Ensure they grow/shrink appropriately */
+		overflow: hidden;
+		/* Prevent overflow */
+	}
+
+	&.act {
+		transform: scale(1);
+		transform-origin: bottom center;
+	}
+
+	&.bk.act {
+		transform-origin: top center;
+	}
+
+	&.bk {
+		transform-origin: bottom center;
+	}
+}
+
+.timeline-actions {
+	display: flex;
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	padding: 5px 0;
+	margin: 0 auto;
+	justify-content: space-evenly;
+	height: 100px;
+	align-items: center;
+}
+
+.timeline-move {
+	display: inline-flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 50px;
+	flex-wrap: wrap;
+	align-content: space-between;
+	translate: -6px;
+
+	.btn {
+		padding: 14px;
+		width: 30px;
+		height: 30px;
+
+		&:hover {
+			background-color: var(--wp--preset--color--base);
+			border-radius: 100%;
+		}
+	}
+
+	.next:hover {
+		filter: drop-shadow(-2px 0px 2px var(--wp--preset--color--contrast));
+	}
+
+	.prev:hover {
+		filter: drop-shadow(2px 0px 2px var(--wp--preset--color--contrast));
+	}
+}
+
+.timeline-dots {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+
+	.dot {
+		width: 30px;
+		height: 30px;
+		background-color: black;
+		/* Dot color */
+		border-radius: 50%;
+
+		border: 1px gray solid;
+		color: black;
+		display: block;
+
+		&:not(:last-child) {
+			margin-right: 49px;
+		}
+
+		/* &:first-child::before, */
+		&:not(:last-child)::after {
+			content: "";
+			width: 50px;
+			height: 1px;
+			background-color: white;
+			position: relative;
+			display: block;
+			top: 50%;
+			left: 100%;
+			transform: translateY(-34%);
+		}
+
+		&:first-child::before {
+			background-color: none;
+			left: initial;
+			right: 100%;
+			transform: translateY(-34%);
+		}
+
+		&.act {
+			background-color: transparent;
+			filter: drop-shadow(0px 1px 1px red);
+		}
+
+		&.done {
+			border-color: var(--wp--preset--color--contrast);
+			background-color: var(--wp--preset--color--contrast);
+
+			&:after {
+				height: 2px;
+			}
+		}
+	}
+}
+
+@media (max-width: 600px) {
+	.timeline-actions {
+		flex-direction: column;
+		padding-bottom: 44px;
+
+		.timeline-move {
+			margin-bottom: 20px;
+		}
+	}
+
+}

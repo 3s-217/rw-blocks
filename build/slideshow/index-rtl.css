@@ -1,0 +1,114 @@
+/*!*****************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/slideshow/css/inf-h.scss ***!
+  \*****************************************************************************************************************************************************************************************************************************************************/
+.rw-blocks-slideshow.inf-h .slides-area {
+  overflow: hidden;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: min-content;
+  white-space: nowrap;
+}
+.rw-blocks-slideshow.inf-h .slides-area .slide {
+  transition: margin-right var(--sld-da, 40s) linear;
+  transform-origin: right;
+  display: flex;
+  margin: 0 1.3em 0 0;
+  flex: 0 0 var(--sld-bw, max-content);
+  overflow: hidden;
+  will-change: auto;
+}
+.rw-blocks-slideshow.inf-h .slides-area .slide.done {
+  margin-right: var(--sld-dml, -100vw);
+}
+/*!**************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/slideshow/editor.scss ***!
+  \**************************************************************************************************************************************************************************************************************************************************/
+/**
+ * The following styles get applied inside the editor only.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
+.timeline-section {
+  border: 1px dotted #f00;
+  max-width: 100%;
+  width: 100%;
+}
+.timeline-section .timeline-content {
+  min-height: 90vh;
+}
+.timeline-section .timeline-content .block-editor-block-list__layout > * {
+  max-width: 100%;
+  width: 100%;
+  height: 100%;
+}
+
+.rw-blocks-slideshow[theme=flex-h] .slides-area,
+.rw-blocks-slideshow[theme=flex-h] .slides-area > .block-editor-inner-blocks > :first-child {
+  overflow-y: hidden;
+}
+
+.rw-blocks-slideshow.icon .slide-content, .rw-blocks-slideshow.inf-h .slide-content, .rw-blocks-slideshow.inf-v .slide-content {
+  width: 100% !important;
+}
+.rw-blocks-slideshow.inf-v {
+  overflow: auto;
+}
+.rw-blocks-slideshow.inf-v .slide {
+  opacity: 1 !important;
+  transform: scaleY(1) !important;
+}
+.rw-blocks-slideshow.inf-h {
+  overflow-x: auto;
+}
+.rw-blocks-slideshow.inf-h .slides-area {
+  display: block !important;
+}
+.rw-blocks-slideshow.sim-dots .slide {
+  position: relative !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
+.rw-blocks-slideshow .slides-area {
+  display: block;
+  overflow: hidden;
+}
+.rw-blocks-slideshow .slides-area > .block-editor-inner-blocks > :first-child {
+  max-height: 100vh;
+  width: var(--sld-aw, 100%);
+  position: relative;
+  height: var(--sld-ah, 100%);
+  overflow: auto;
+  display: flex;
+  justify-content: start;
+}
+.rw-blocks-slideshow .slides-area .slide-content > .block-editor-inner-blocks > :first-child {
+  height: var(--sld-c, 100%);
+}
+
+.flex-opt {
+  justify-content: space-around;
+  display: flex;
+}
+
+.components-tab-panel__tabs {
+  overflow: auto;
+  margin-bottom: 3px;
+}
+.components-tab-panel__tabs::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+.components-tab-panel__tabs::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 0px rgba(143, 139, 139, 0);
+  border-radius: 0px;
+}
+.components-tab-panel__tabs::-webkit-scrollbar-thumb {
+  background-color: grey;
+  border-radius: 21px;
+  -webkit-transition: background-color 2s ease-in-out;
+  transition: background-color 2s ease-in-out;
+}
+.components-tab-panel__tabs::-webkit-scrollbar-thumb:hover {
+  border-color: transparent;
+  background: black;
+}

@@ -1,0 +1,19 @@
+.rw-blocks-slideshow[theme=icon] .slides-area {
+  overflow: hidden;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: min-content;
+  white-space: nowrap;
+}
+.rw-blocks-slideshow[theme=icon] .slides-area .slide {
+  transform-origin: left;
+  display: flex;
+  margin: 0 0 0 1.3em;
+  flex: 0 0 var(--sld-bw, 100%);
+  overflow: hidden;
+  will-change: auto;
+}
+.rw-blocks-slideshow[theme=icon] .slides-area .slide.done {
+  transition: margin-left var(--sld-da, 40s) linear;
+  margin-left: var(--sld-dml, -100vw);
+}

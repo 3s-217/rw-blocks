@@ -1,0 +1,62 @@
+.rw-blocks-slideshow.sim-dots .slide {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  transform-origin: center;
+  opacity: 0;
+  transition: all var(--sld-da, 1s);
+}
+.rw-blocks-slideshow.sim-dots .slide.act {
+  opacity: 1;
+}
+.rw-blocks-slideshow.sim-dots .slide-ctrl {
+  height: 100%;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  display: contents;
+}
+.rw-blocks-slideshow.sim-dots .slide-mv {
+  display: contents;
+  height: 100%;
+  cursor: pointer;
+}
+.rw-blocks-slideshow.sim-dots .slide-mv > div {
+  padding: 1em 2em;
+  position: absolute;
+  top: 36%;
+  font-size: 20px;
+}
+.rw-blocks-slideshow.sim-dots .slide-mv > div.next {
+  right: 0;
+}
+.rw-blocks-slideshow.sim-dots .slide-mv > div:hover {
+  background-color: rgba(128, 128, 128, 0.342);
+}
+.rw-blocks-slideshow.sim-dots .slide-dots {
+  bottom: 4%;
+  position: absolute;
+  transform: translateX(-50%);
+  left: 50%;
+  display: flex;
+  justify-content: center;
+}
+.rw-blocks-slideshow.sim-dots .slide-dots .dot {
+  width: 10px;
+  height: 10px;
+  background: rgba(255, 255, 255, 0);
+  border: 1px solid grey;
+  border-radius: 100%;
+  transition: all 1s;
+}
+.rw-blocks-slideshow.sim-dots .slide-dots .dot.act {
+  background: rgb(255, 255, 255);
+  opacity: 1;
+}
+.rw-blocks-slideshow.sim-dots .slide-dots .dot.done {
+  background: rgb(255, 255, 255);
+  opacity: 0.7;
+}
+.rw-blocks-slideshow.sim-dots .slide-dots .dot:not(:last-child) {
+  margin-right: 3px;
+}

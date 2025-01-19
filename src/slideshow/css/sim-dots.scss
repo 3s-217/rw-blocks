@@ -1,0 +1,77 @@
+.rw-blocks-slideshow.sim-dots {
+	.slide {
+		position: absolute;
+		left: 50%;
+		transform: translateX(-50%);
+		transform-origin: center;
+		opacity: 0;
+		transition: all var(--sld-da, 1s);
+
+		//.slide-content {}
+
+		&.act {
+			opacity: 1;
+		}
+	}
+
+	.slide-ctrl {
+		height: 100%;
+		position: absolute;
+		top: 0;
+		width: 100%;
+		display: contents;
+	}
+
+	.slide-mv {
+		display: contents;
+		height: 100%;
+		cursor: pointer;
+
+		&>div {
+			padding: 1em 2em;
+			position: absolute;
+			top: 36%;
+			font-size: 20px;
+
+			&.next {
+				right: 0
+			}
+
+			&:hover {
+				background-color: rgba(128, 128, 128, 0.342);
+			}
+		}
+	}
+
+	.slide-dots {
+		bottom: 4%;
+		position: absolute;
+		transform: translateX(-50%);
+		left: 50%;
+		display: flex;
+		justify-content: center;
+
+		.dot {
+			width: 10px;
+			height: 10px;
+			background: rgba(255, 255, 255, 0);
+			border: 1px solid grey;
+			border-radius: 100%;
+			transition: all 1s;
+
+			&.act {
+				background: rgb(255, 255, 255);
+				opacity: 1;
+			}
+
+			&.done {
+				background: rgb(255, 255, 255);
+				opacity: 0.7;
+			}
+		}
+
+		.dot:not(:last-child) {
+			margin-right: 3px;
+		}
+	}
+}

@@ -1,0 +1,30 @@
+{
+	"name": "rw-blocks",
+	"version": "0.1.3",
+	"description": "Example block scaffolded with Create Block tool.",
+	"author": "S³217",
+	"license": "GPL-2.0-or-later",
+	"main": "index.js",
+	"scripts": {
+		"build": "npx wp-scripts build",
+		"format": "npx wp-scripts format",
+		"lint:css": "npx wp-scripts lint-style",
+		"lint:js": "npx wp-scripts lint-js",
+		"packages-update": "npx wp-scripts packages-update",
+		"plugin-zip": "npx wp-scripts plugin-zip",
+		"start": "npx wp-scripts start && npx gulp sass",
+		"sass": "npx gulp wsass"
+	},
+	"files": [
+		"assets",
+		"build"
+	],
+	"devDependencies": {
+		"@wordpress/env": "^10.14.0",
+		"@wordpress/scripts": "^30.7.0"
+	},
+	"dependencies": {
+		"@wordpress/element": "^6.14.0",
+		"gulp_bld": "github:3s-217/gulp_bld#main"
+	}
+}

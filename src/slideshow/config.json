@@ -1,0 +1,60 @@
+{
+	"themes": [
+		{
+			"nm": "Flex horizontal",
+			"pt": "css/flex-h.css"
+		},
+		{
+			"nm": "Flex vertical",
+			"pt": "css/flex-v.css"
+		},
+		{
+			"nm": "Full viewport",
+			"pt": "css/abs.css"
+		},
+		{
+			"nm": "Infinity horizontal",
+			"pt": "css/inf-h.css"
+		},
+		{
+			"nm": "Infinity vertical",
+			"pt": "css/inf-v.css"
+		},
+		{
+			"nm": "Simple slider dots horizontal",
+			"pt": "css/sim-dots.css"
+		}
+	],
+	"configs": [
+		{
+			"h": "100%",
+			"w": "100%",
+			"gu": 1,
+			"th": "flex-h",
+			"dot": "div",
+			"lp": 0,
+			"an": 0,
+			"dur": 5000,
+			"css": {
+				"slideSection": {},
+				"slidesArea": {},
+				"slide": {},
+				"slideContent": {},
+				"slideCtrl": {},
+				"slideMv": {},
+				"next": {},
+				"prev": {},
+				"slideDots": {},
+				"slideDot": {}
+			},
+			"nxt": "<",
+			"prv": ">",
+			"act": {
+				"f": "done",
+				"a": "act",
+				"r": "bk"
+			}
+		},
+		{}
+	]
+}

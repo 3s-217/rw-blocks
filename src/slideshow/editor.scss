@@ -1,0 +1,119 @@
+/**
+ * The following styles get applied inside the editor only.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
+
+.timeline-section {
+	border: 1px dotted #f00;
+	//overflow-y: scroll;
+	max-width: 100%;
+	width: 100%;
+
+	.timeline-content {
+		min-height: 90vh;
+	}
+
+	.timeline-content .block-editor-block-list__layout>* {
+		max-width: 100%;
+		width: 100%;
+		height: 100%;
+
+	}
+}
+
+.rw-blocks-slideshow[theme='flex-h'] {
+
+	.slides-area,
+	.slides-area>.block-editor-inner-blocks> :first-child {
+		overflow-y: hidden;
+	}
+}
+
+.rw-blocks-slideshow {
+
+	&.icon,
+	&.inf-h,
+	&.inf-v {
+		.slide-content {
+			width: 100% !important;
+		}
+	}
+
+	&.inf-v {
+		overflow: auto;
+
+		.slide {
+			opacity: 1 !important;
+			transform: scaleY(1) !important;
+		}
+
+	}
+
+	&.inf-h {
+		overflow-x: auto;
+
+		.slides-area {
+			display: block !important;
+		}
+	}
+
+	&.sim-dots .slide {
+		position: relative !important;
+		opacity: 1 !important;
+		transform: none !important;
+	}
+
+	.slides-area {
+		display: block;
+		overflow: hidden;
+
+		&>.block-editor-inner-blocks> :first-child {
+			max-height: 100vh;
+			width: var(--sld-aw, 100%);
+			position: relative;
+			height: var(--sld-ah, 100%);
+			overflow: auto;
+			display: flex;
+			justify-content: start;
+		}
+
+
+
+		.slide-content>.block-editor-inner-blocks> :first-child {
+			height: var(--sld-c, 100%);
+		}
+	}
+}
+
+.flex-opt {
+	justify-content: space-around;
+	display: flex;
+}
+
+.components-tab-panel__tabs {
+	overflow: auto;
+
+	margin-bottom: 3px;
+
+	&::-webkit-scrollbar {
+		width: 5px;
+		height: 5px;
+	}
+
+	&::-webkit-scrollbar-track {
+		box-shadow: inset 0 0 0px rgba(143, 139, 139, 0);
+		border-radius: 0px;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		background-color: grey;
+		border-radius: 21px;
+		transition: background-color 2s ease-in-out;
+
+		&:hover {
+			border-color: transparent;
+			background: black;
+		}
+	}
+}
