@@ -1,0 +1,51 @@
+.rw-blocks-slideshow.s-inline {
+	display: inline;
+
+	.slides-area {
+		display: inline;
+
+		.slide {
+			display: none;
+
+			&.act {
+				display: inline;
+			}
+		}
+
+		.slide-content {
+			display: inline;
+
+			&>*:first-child {
+				display: inline;
+			}
+		}
+	}
+
+	.slide-ctrl {
+		display: none;
+	}
+
+	&.cursor {
+		.slides-area::after {
+			width: 1px;
+			content: ".";
+			background: white;
+			height: 100%;
+			font-size: 5px;
+			position: absolute;
+			animation: rw-blink 600ms infinite ease-in-out;
+		}
+	}
+
+
+}
+
+@keyframes rw-blink {
+	from {
+		opacity: 0;
+	}
+
+	to {
+		opacity: 1;
+	}
+}

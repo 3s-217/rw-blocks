@@ -12,7 +12,7 @@ import {
 import { useState, useEffect, useRef } from '@wordpress/element';
 //======================================
 import { Slideshow, Slide, arrows, sldObjNm } from './main';
-import { DynamicKeyValuePair, useQueryBlocks, addLinkStyle, nested, SetKeyVals } from '../option';
+import { DynamicKeyValuePair, useQueryBlocks, addLinkStyle, nested, SetKeyVals, OptI } from '../option';
 import conf from './config.json';
 const sldtypes = new Map();
 conf.themes.map(v => sldtypes.set(v.nm, (v.pt = v.pt.split("/")[1].split(".")[0], v)));
@@ -37,112 +37,112 @@ function BlkOpt(props) {
 	});
 	const ext = (t, n, k = '') => ({ title: t, name: n, sattr, attr: a, ky: k });
 	return (
-		<InspectorControls >
-			<div style={{ padding: "0 1.3em" }}>
-				<p>parentId {pi}</p>
-				<p>slideCount {s}</p>
-				<hr />
-				<SelectControl
-					label="Slideshow layouts"
-					value={a.theme}
-					options={Array.from(sldtypes).map(([k, v]) => ({ label: v.nm, value: v.pt }))}
-					onChange={v => sattr({ theme: v, sldAttr: { ...a.sldAttr, theme: v } })}
+		<OptI>
+			<p>parentId {pi}</p>
+			<p>slideCount {s}</p>
+			<hr />
+			<SelectControl
+				label="Slideshow layouts"
+				value={a.theme}
+				options={Array.from(sldtypes).map(([k, v]) => ({ label: v.nm, value: v.pt }))}
+				onChange={v => sattr({ theme: v, sldAttr: { ...a.sldAttr, theme: v } })}
+			/>
+			<div className='flex-opt'>
+				<ToggleControl
+					label="GUI"
+					checked={!!a.gui}
+					onChange={(v) => sattr({ gui: v ? 1 : 0 })}
+					__nextHasNoMarginBottom={!!1}
 				/>
-				<div className='flex-opt'>
+				<div style={{
+					display: 'flex', alignItems: ' stretch',
+					justifyContent: 'center',
+				}}>
+					<span style={{ marginRight: '1em' }}>LR</span>
 					<ToggleControl
-						label="GUI"
-						checked={!!a.gui}
-						onChange={(v) => sattr({ gui: v ? 1 : 0 })}
-						__nextHasNoMarginBottom={!!1}
+						label="UD"
+						checked={a.btnIco == 'ud'}
+						onChange={(v) => sattr({ btnIco: v ? 'ud' : 'lr' })}
 					/>
-					<div style={{
-						display: 'flex', alignItems: ' stretch',
-						justifyContent: 'center',
-					}}>
-						<span style={{ marginRight: '1em' }}>LR</span>
-						<ToggleControl
-							label="UD"
-							checked={a.btnIco == 'ud'}
-							onChange={(v) => sattr({ btnIco: v ? 'ud' : 'lr' })}
-						/>
-					</div>
 				</div>
-				{a.gui ? <SelectControl
-					label="Slideshow Arrow"
-					value={btn}
-					options={Object.entries(arrows).map(ar => ({ label: Object.values(ar[1]).join(" "), value: ar[0], id: ar[0] }))}
-					onChange={(v, e) => (setBtn(v), sattr({ nextBtn: arrows[v], prevBtn: arrows[v] }))}
-				/> : <></>}
-				<hr />
-				<div className='flex-opt'>
-					{
-						['run', 'lp'].map(e => (
-							<ToggleControl
-								label={e == 'lp' ? 'loop' : "animation"}
-								checked={a.anima[e]?1:0}
-								onChange={(v) => (sattr({ anima: { ...a.anima, [e]: v ? 1 : 0 } }))}
-							/>
-						))
-					}
-				</div>
-				<TextControl
-					label="Duration per slide (sec)"
-					value={a.anima.tm || ''}
-					placeholder='default'
-					type="number"
-					onChange={(v) => sattr({ anima: { ...a.anima, tm: v } })}
-				/>
-				<PanelBody initialOpen={!!0} title="Styling">
-					<TabPanel tabs={[
-						{ title: 'slide show', name: 'show', css: "" },
-						{ title: 'slides area', name: 'area', css: "a" },
-						{ title: 'slide', name: 'slide', css: "b" },
-						{ title: 'slide content', name: 'content', css: "c" },
-						{ title: 'slide ctrl', name: 'ctrl', css: "z" }
-					]}
-						children={tab => {
-							const f = i => (tab.css == "" ? i : `--sld-${tab.css}${i[0]}`);
-							return <div>
-								<div style={{
-									fontWeight: 'bold',
-									textTransform: 'uppercase',
-									margin: '11px 0 0 0',
-									fontSize: '12px}'
-								}}>{tab.title} </div>
-								<div>Make sure to add the units</div>
-								<hr />
-								{['height', 'width'].map(d => <TextControl
-									label={d}
-									value={a.sldCss[f(d)] ?? ''}
-									placeholder='default'
-									onChange={v => sattr({ sldCss: { ...a.sldCss, [f(d)]: v } })}
-								/>)}
-							</div>;
-						}} />
-				</PanelBody>
-				<ExtAdv tabs={[
-					...[
-						['slide-show', 'slide'],
-						['slides-area', 'area', 'Ar'],
-						['slide-ctrl', 'ctrl', 'Ctrl'],
-						['slide-mv', 'mv-area', 'Mv'],
-						['next', 'next', 'Nxt'],
-						['prev', 'prev', 'Prv'],
-						['slide-dots', 'dots-area', 'Dots']
-					].map(v => ext(...v))
-				]} />
-				<PanelBody initialOpen={!!0} title="Import json block config">
-					<TextControl label="json config/props" onChange={v => sattr({ ijson: v })} />
-					<i style={{ color: "red", marginBottom: '1.3em' }}>
-						will override
-					</i>
-					<Button style={{ border: "1px black solid" }} onClick={() => a.ijson.length ? importBlockConf(a.ijson, props) : 0}>
-						Import Json Props
-					</Button>
-				</PanelBody>
-				<PanelImEx attr={a} />
 			</div>
-		</InspectorControls >
+			{a.gui ? <SelectControl
+				label="Slideshow Arrow"
+				value={btn}
+				options={Object.entries(arrows).map(ar => ({ label: Object.values(ar[1]).join(" "), value: ar[0], id: ar[0] }))}
+				onChange={(v, e) => (setBtn(v), sattr({ nextBtn: arrows[v], prevBtn: arrows[v] }))}
+			/> : <></>}
+			<hr />
+			<div className='flex-opt'>
+				{
+					['run', 'lp'].map(e => (
+						<ToggleControl
+							label={e == 'lp' ? 'loop' : "animation"}
+							checked={a.anima[e] ? 1 : 0}
+							onChange={(v) => (sattr({ anima: { ...a.anima, [e]: v ? 1 : 0 } }))}
+						/>
+					))
+				}
+			</div>
+			<TextControl
+				label="Duration per slide (sec)"
+				value={a.anima.tm || ''}
+				placeholder='default'
+				type="number"
+				onChange={(v) => sattr({ anima: { ...a.anima, tm: v } })}
+			/>
+			<Optcmts {...props} />
+			<PanelBody initialOpen={!!0} title="Styling">
+				<TabPanel tabs={[
+					{ title: 'slide show', name: 'show', css: "" },
+					{ title: 'slides area', name: 'area', css: "a" },
+					{ title: 'slide', name: 'slide', css: "b" },
+					{ title: 'slide content', name: 'content', css: "c" },
+					{ title: 'slide ctrl', name: 'ctrl', css: "z" }
+				]}
+					children={tab => {
+						const f = i => (tab.css == "" ? i : `--sld-${tab.css}${i[0]}`);
+						return <div>
+							<div style={{
+								fontWeight: 'bold',
+								textTransform: 'uppercase',
+								margin: '11px 0 0 0',
+								fontSize: '12px}'
+							}}>{tab.title} </div>
+							<div>Make sure to add the units</div>
+							<hr />
+							{['height', 'width'].map(d => <TextControl
+								label={d}
+								value={a.sldCss[f(d)] ?? ''}
+								placeholder='default'
+								onChange={v => sattr({ sldCss: { ...a.sldCss, [f(d)]: v } })}
+							/>)}
+						</div>;
+					}} />
+			</PanelBody>
+			<ExtAdv tabs={[
+				...[
+					['slide-show', 'slide'],
+					['slides-area', 'area', 'Ar'],
+					['slide-ctrl', 'ctrl', 'Ctrl'],
+					['slide-mv', 'mv-area', 'Mv'],
+					['next', 'next', 'Nxt'],
+					['prev', 'prev', 'Prv'],
+					['slide-dots', 'dots-area', 'Dots']
+				].map(v => ext(...v))
+			]} />
+			<PanelBody initialOpen={!!0} title="Import json block config">
+				<TextControl label="json config/props" onChange={v => sattr({ ijson: v })} />
+				<i style={{ color: "red", marginBottom: '1.3em' }}>
+					will override
+				</i>
+				<Button style={{ border: "1px black solid" }} onClick={() => a.ijson.length ? importBlockConf(a.ijson, props) : 0}>
+					Import Json Props
+				</Button>
+			</PanelBody>
+			<PanelImEx attr={a} />
+
+		</OptI>
 	);
 }
 //* Slide editor options
@@ -153,45 +153,125 @@ function SldOpt(props) {
 	const ext = (t, n, k = '') => ({ title: t, name: n, sattr, attr: a, ky: k });
 	return (
 		<>
-			<InspectorControls>
-				<div style={{ padding: "1.2em" }}>
-					<p>slideshowIdx: {pi}</p>
-					<p>sldIdx: {ssi}</p>
-					<p>slideCount: {s}</p>
-					<hr />
-					{/* <Button name='refresh dots'
-						//onClick={() => _ui.slideBox.shows[ssi].dots()}
-						style={{ border: "1px black solid", padding: "inherit 1.2em", margin: "0 auto" }}
-					>Refresh dots</Button> <hr />*/}
-					<div style={{ display: "block" }}>
-						<p>Base Background</p>
-						{[
-							["", "", view.sld],
-							[" Content", "Ar", view.sldAr]
-						].map(v => <OptColor
-							attributes={a}
-							setAttributes={sattr}
-							title={"Slide" + v[0]}
-							rtKey={`sld${v[1]}Css`}
-							skey="background"
-							show={i => setView({ ...view, [`sld${v[1]}`]: !!(v[2] ? 0 : 1) })}
-							view={v[2]}
-						/>
-						)}
-					</div>
-					<ExtAdv tabs={[
-						['slide', 'slide'],
-						['content', 'content', 'Ar']
-					].map(v => ext(...v))} />
-					<PanelImEx attr={a} />
+			<OptI>
+				<p>slideshowIdx: {pi}</p>
+				<p>sldIdx: {ssi}</p>
+				<p>slideCount: {s}</p>
+				<hr />
+				<ToggleControl
+					label="Contents as text"
+					checked={a.txt}
+					onChange={(v) => sattr({ txt: !!v })}
+				//disabled={a?.pure}
+				/>
+				<div style={{ display: "block" }}>
+					<p>Base Background</p>
+					{[
+						["", "", view.sld],
+						[" Content", "Ar", view.sldAr]
+					].map(v => <OptColor
+						attributes={a}
+						setAttributes={sattr}
+						title={"Slide" + v[0]}
+						rtKey={`sld${v[1]}Css`}
+						skey="background"
+						show={i => setView({ ...view, [`sld${v[1]}`]: !!(v[2] ? 0 : 1) })}
+						view={v[2]}
+					/>
+					)}
 				</div>
-			</InspectorControls >
-			<Slide attributes={a} edit={!!1} />
+				<Optcmts {...props} />
+				<ExtAdv tabs={[
+					['slide', 'slide'],
+					['content', 'content', 'Ar']
+				].map(v => ext(...v))} />
+				<PanelImEx attr={a} />
+			</OptI>
+			<Slide {...props} edit={!!1} />
 		</>
 	);
 }
+function SldTxtOpt(props) {
+	const { attributes: a, setAttributes: sattr } = props;
+	const ext = (t, n) => ({ title: t, name: n, sattr, attr: a, key: 1 });
+	return (
+		<OptI>
+			<TextControl
+				label="type"
+				value={a.type.length ? a.type : ''}
+				placeholder='div'
+				type="text"
+				onChange={(v) => {
+					!__o.utils.type(Number(v), 'num') ?
+						(__o.log('what is this ', v, __o.utils.type(v, 'num')),
+							sattr({ type: v })) :
+						0;
+				}}
+			/>
+			<Optcmts {...props} />
+			<PanelImEx attr={a} />
+			<ExtAdv tabs={[ext('sldshw-txt', 'slideshw')]} />
+		</OptI>
+	);
+}
+function RwAnyOpt(props, ...args) {
+	const { attributes: a, setAttributes: sattr } = props;
+	const ext = (t, n) => ({ title: t, name: n, sattr, attr: a, key: ['css', 'attr'] });
+	return (
+		<OptI>
+			<br />
+			<p style={{ color: "red" }}>
+				<strong>Use or Edit this block only if you know what you are doing</strong>
+				<br />
+				<hr />
+			</p>
+			<p>
+				If <strong><i>script or style</i> is el type there are no safe guards</strong>
+			</p>
+			<TextControl
+				label="type"
+				value={a.type}
+				placeholder='div'
+				type="text"
+				onChange={v => {
+					!__o.utils.type(Number(v), 'num') || !v.length ?
+						sattr({ type: v }) : 0;
+				}}
+				disabled={a.pure}
+			/>
+			<hr />
+			<p>If <strong><i>Contents as text</i> is enabled </strong>
+				it will wrap contents in html tags using the provided type
+				<br />
+				<hr />
+			</p>
+			<ToggleControl
+				label="Contents as text"
+				checked={a.txt}
+				onChange={(v) => sattr({ txt: !!v })}
+				disabled={a.pure}
+			/>
+			<hr />
+			<p>If <strong><i>just text</i> is enabled </strong>
+				it returns only text without any html tag
+				wp logic will auto add <i>newline</i> before and after text
+				<br />
+				<hr />
+			</p>
+			<ToggleControl
+				label="Just text"
+				checked={a.pure}
+				onChange={(v) => sattr({ pure: !!v, txt: v ? !!1 : a.txt })}
+			/>
+			<hr />
+			<Optcmts {...props} />
+			<PanelImEx attr={a} />
+			<ExtAdv tabs={[ext('Element', 'Element')]} />
+		</OptI>
+	);
+}
 //======================================
-export { BlkOpt, SldOpt };
+export { BlkOpt, SldOpt, SldTxtOpt, RwAnyOpt };
 //======================================
 function PanelImEx(props) {
 	const { attr: a, sattr } = props;
@@ -261,14 +341,32 @@ function OptColor({ attributes: a, setAttributes: sattr, rtKey, skey, show, titl
 	);
 }
 //==============
+function Optcmts({ attributes: a, setAttributes: sattr }) {
+	return <PanelBody initialOpen={!!0} title="Comments">
+		<div style={{
+			background: '#ededed',
+			padding: '11px',
+			borderRadius: "7px"
+		}}>
+			<RichText
+				onChange={v => sattr({ cmt: v })}
+				value={a.cmt}
+				placeholder='user/block comments' />
+		</div>
+	</PanelBody>;
+}
 //* Extreme adv Tabpanel El
 function ExtAdv({ tabs }) {
 	return <PanelBody initialOpen={!!0} title="Exterme Adv.">
-		<p style={{ color: 'red' }}>You have access to <strong>add|remove</strong> any react prop procced with caution</p>
+		<p style={{ color: 'red' }}>
+			You have access to
+			<strong> add|remove </strong>
+			any react prop procced with caution
+		</p>
 		<TabPanel tabs={tabs} children={exTabs} />
 	</PanelBody>;
 }
-function exTabs({ name, title, attr, sattr, ky = "" }) {
+function exTabs({ name, title, attr, sattr, ky = "", key }) {
 	return (
 		<Panel>
 			{
@@ -282,7 +380,7 @@ function exTabs({ name, title, attr, sattr, ky = "" }) {
 						<SetKeyVals
 							attributes={attr}
 							setAttributes={sattr}
-							attributeKey={`sld${ky}${v[2]}`}
+							attributeKey={key ? key[i] : `sld${ky}${v[2]}`}
 							isCss={i == 0}
 						/>
 					</PanelBody>
@@ -291,3 +389,9 @@ function exTabs({ name, title, attr, sattr, ky = "" }) {
 		</Panel>
 	);
 }
+(<div class='rwAny'>
+	<wp-core-blocks></wp-core-blocks>
+	<span class='rwAny'>test</span>
+	{/* text generated by another rwAny attr.pure=true*/}
+	plain RichText
+</div>);

@@ -6,14 +6,23 @@
   white-space: nowrap;
 }
 .rw-blocks-slideshow.inf-h .slides-area .slide {
-  transition: margin-left var(--sld-da, 40s) linear;
   transform-origin: left;
   display: flex;
   margin: 0 0 0 1.3em;
   flex: 0 0 var(--sld-bw, max-content);
   overflow: hidden;
   will-change: auto;
+  animation: brandIcoH var(--sld-da, 40s) linear 1 forwards;
 }
-.rw-blocks-slideshow.inf-h .slides-area .slide.done {
-  margin-left: var(--sld-dml, -100vw);
+.rw-blocks-slideshow.inf-h .slides-area .slide-content > *:first-child {
+  overflow: hidden;
+}
+
+@keyframes brandIcoH {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(var(--sld-dml, -100vw));
+  }
 }

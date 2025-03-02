@@ -1,4 +1,4 @@
-.rw-blocks-slideshow.inf-v {
+s-bx.rw-blocks-slideshow.inf-v,.rw-blocks-slideshow.inf-v {
 	.slides-area {
 		overflow: hidden;
 		display: grid;
@@ -41,8 +41,9 @@
 
 		}
 
-		.slide-content>p:first-child {
+		.slide-content>*:first-child {
 			margin: 0;
+			overflow: hidden;
 		}
 	}
 }

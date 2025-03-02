@@ -26,7 +26,7 @@ defaultConfig.plugins.push(
 					else { return 'null'; }
 				}
 				const data = JSON.parse(content.toString());
-				const php = `<?php\nreturn ${jsonToPhpArray(data)};`;
+				const php = `<?php\nif (!defined('ABSPATH')){exit;}\n return ${jsonToPhpArray(data)};`;
 				return Buffer.from(php);
 			},
 			noErrorOnMissing: !!1
@@ -34,4 +34,9 @@ defaultConfig.plugins.push(
 		]
 	})
 );
+defaultConfig.externals = {
+	...defaultConfig?.externals,
+	coreweb: { root: '../../includes/core.es.js' },
+};
+//console.log(defaultConfig);
 module.exports = defaultConfig;

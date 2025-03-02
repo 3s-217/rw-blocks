@@ -1,0 +1,53 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rw-blocks/counter",
+  "version": "0.1.0",
+  "title": "counter",
+  "category": "rw-blocks",
+  "icon": "dashboard",
+  "description": "counter",
+  "example": {},
+  "supports": {
+    "anchor": true,
+    "ariaLabel": true,
+    "align": true,
+    "color": {
+      "gradients": true,
+      "heading": true,
+      "button": true,
+      "link": true,
+      "border": true
+    },
+    "background": {
+      "backgroundImage": true,
+      "backgroundSize": true
+    },
+    "spacing": {
+      "margin": true,
+      "padding": true,
+      "blockGap": true,
+      "height": true
+    },
+    "border": {
+      "width": true,
+      "style": true,
+      "radius": true
+    },
+    "typography": {
+      "fontSize": true,
+      "fontStyle": true,
+      "fontWeight": true,
+      "lineHeight": true,
+      "fontFamily": true,
+      "textTransform": true,
+      "textDecoration": true,
+      "textAlign": true
+    }
+  },
+  "textdomain": "counter",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style.css",
+  "viewScript": "file:./view.js"
+}

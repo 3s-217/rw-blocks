@@ -23,8 +23,13 @@
 		{
 			"nm": "Simple slider dots horizontal",
 			"pt": "css/sim-dots.css"
+		},
+		{
+			"nm": "inline (text)",
+			"pt": "css/s-inline.css"
 		}
 	],
+	"examples": [],
 	"configs": [
 		{
 			"h": "100%",

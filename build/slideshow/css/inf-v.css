@@ -1,11 +1,11 @@
-.rw-blocks-slideshow.inf-v .slides-area {
+s-bx.rw-blocks-slideshow.inf-v .slides-area, .rw-blocks-slideshow.inf-v .slides-area {
   overflow: hidden;
   display: grid;
   grid-auto-flow: row;
   grid-auto-rows: min-content;
   white-space: nowrap;
 }
-.rw-blocks-slideshow.inf-v .slides-area .slide {
+s-bx.rw-blocks-slideshow.inf-v .slides-area .slide, .rw-blocks-slideshow.inf-v .slides-area .slide {
   transition: opacity var(--sld-da, 10s) linear;
   transform-origin: bottom;
   display: block;
@@ -18,20 +18,21 @@
   	margin: 0;
   } */
 }
-.rw-blocks-slideshow.inf-v .slides-area .slide.act {
+s-bx.rw-blocks-slideshow.inf-v .slides-area .slide.act, .rw-blocks-slideshow.inf-v .slides-area .slide.act {
   opacity: 1;
   transition: all calc(var(--sld-da, 10s) / 2) linear;
   margin: 0;
   transform: scaleY(1);
   transform-origin: top;
 }
-.rw-blocks-slideshow.inf-v .slides-area .slide.done {
+s-bx.rw-blocks-slideshow.inf-v .slides-area .slide.done, .rw-blocks-slideshow.inf-v .slides-area .slide.done {
   transform-origin: top;
   transition: all var(--sld-da, 10s) linear;
   transform: scaleY(0);
   margin: 0;
   margin-top: var(--sld-dmt, -100vw);
 }
-.rw-blocks-slideshow.inf-v .slides-area .slide-content > p:first-child {
+s-bx.rw-blocks-slideshow.inf-v .slides-area .slide-content > *:first-child, .rw-blocks-slideshow.inf-v .slides-area .slide-content > *:first-child {
   margin: 0;
+  overflow: hidden;
 }

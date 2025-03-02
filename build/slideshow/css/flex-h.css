@@ -7,12 +7,14 @@
   margin-left: 20px;
   transition: opactiy 1s;
   opacity: 0.7;
+  /*
+  			&.done,
+  			&.bk {
+  				opacity: 0.7;
+  			} */
 }
 .rw-blocks-slideshow.flex-h .slides-area .slide.act {
   opacity: 1;
-}
-.rw-blocks-slideshow.flex-h .slides-area .slide.done, .rw-blocks-slideshow.flex-h .slides-area .slide.bk {
-  opacity: 0.7;
 }
 .rw-blocks-slideshow.flex-h .slide-dots {
   display: flex;

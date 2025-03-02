@@ -1,55 +1,8 @@
+import { InspectorControls, InnerBlocks, RichText, useBlockProps, } from '@wordpress/block-editor';
 import { TextControl, Button } from '@wordpress/components';
-import { useState, useEffect } from '@wordpress/element';
+import { useState, useEffect, createElement } from '@wordpress/element';
 import { useSelect } from '@wordpress/data';
-
-const DynamicKeyValuePair = ({ attributes, setAttributes: sattr, attributeKey: attrKey, isStyle = false }) => {
-	const [pairs, setPairs] = useState(Object.entries(attributes[attrKey] || {}));
-	const addPair = () => setPairs([...pairs, ['', '']]);
-	const updatePair = (idx, key, val) => {
-		const newPairs = [...pairs]; newPairs[idx] = [key, val];
-		setPairs(newPairs);
-		const nAttr = newPairs.reduce((acc, [k, v]) => {
-			if (k) {
-				if (isStyle) {
-					acc[k] = v;
-				} else { acc[k] = v; }
-			} return acc;
-		}, {});
-		sattr({ [attrKey]: nAttr });
-	};
-	const removePair = (index) => {
-		const newPairs = [...pairs];
-		newPairs.splice(index, 1); setPairs(newPairs);
-		const nAttr = newPairs.reduce((acc, [k, v]) => {
-			if (k) {
-				if (isStyle) {
-					acc[k] = v;
-				} else { acc[k] = v; }
-			} return acc;
-		}, {});
-		sattr({ [attrKey]: nAttr });
-	};
-	return (
-		<div> {
-			pairs.map(([key, val], idx) => (
-				<div key={idx} >
-					<TextControl
-						label="Property"
-						value={key}
-						onChange={(nProp) => updatePair(idx, nProp, val)}
-					/>
-					<TextControl
-						label="Value"
-						value={val}
-						onChange={(nVal) => updatePair(idx, key, nVal)}
-					/>
-					<Button isDestructive onClick={() => removePair(idx)}>Remove</Button>
-				</div>
-			))}
-			<Button primary onClick={addPair}>Add Property</Button>
-		</div>
-	);
-};
+import { c_h, nested, addLinkStyle, rgx } from './utils';
 
 const SetKeyVals = ({ attributes: attr, setAttributes: sattr, attributeKey: aKey, isCss = !!1 }) => {
 	const isN = /\./.test(aKey);
@@ -150,21 +103,41 @@ const MyComponent = ({ clientId }) => {
 		</div>
 	);
 };
-const addLinkStyle = (href, id) => {
-	_c(document.head).append("link", { id, href, rel: "stylesheet" });
+
+const mergeObj = (props, extra) => { return Object.assign({}, props, extra); };
+const mergeCls = (base, extra) => { return [...base.split(/\s+/g), ...extra].join(" "); };
+
+function Cel({ el = 'div', attr = {}, cls = '', cb, css = {}, children, more = {} }) {
+	const ta = (a, b, c) => {
+		const d = b?.className?.split(/\s+/g);
+		return mergeCls(a, Array.isArray(d) ? (typeof cb == 'function' ? d?.filter(cb) : d) : []);
+	};
+	const cs = el?.indexOf('-') ?? -1;
+
+	const fn = {
+		...attr,
+		['class' + (cs > -1 ? '' : 'Name')]: ta(cls, attr).trim(),
+		...(Object.keys(css).length ? { style: css } : css),
+		...more,
+	};
+	if (cs > -1) {
+		//__o.log(el, more, attr, cls);
+		delete fn.className;
+	}
+	//__o.log(fn, attr, ['class' + (cs > -1 ? '' : 'Name')], cls?.split(/\s+/g).concat(attr?.className?.split(/\s+/g)).join(" "), ta(cls, attr).trim());
+	return createElement(el, fn, children);
+}
+
+function OptI({ children }) {
+	return <InspectorControls>
+		<div style={{ padding: "0 1.3em" }}>{children}</div>
+	</InspectorControls>;
+
+}
+
+export {
+	c_h, nested, addLinkStyle,
+	mergeCls, mergeObj,
+	useQueryBlocks, queryBlocksNm, ErrorBoundary,
+	SetKeyVals, Cel, OptI, rgx
 };
-function nested(obj, path, v, act) {
-	const ps = path.split('.');
-	const l = ps.pop();
-	const tgt = ps.reduce((o, k) => o[k] = o[k] ?? {}, obj);
-	if (act === 'set') tgt[l] = v;
-	else if (act === 'rm' && tgt && tgt.hasOwnProperty(l))
-		delete tgt[l];
-	else return tgt[l];
-}
-function c_h(str, toCamel) {
-	return toCamel ?
-		str.replace(/-./g, match => match.charAt(1).toUpperCase()) :
-		str.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
-}
-export { DynamicKeyValuePair, useQueryBlocks, addLinkStyle, nested, SetKeyVals, queryBlocksNm, ErrorBoundary };

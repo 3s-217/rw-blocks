@@ -1,14 +1,6 @@
-/**
- * The following styles get applied both on the front of your site
- * and in the editor.
- *
- * Replace them with your own styles or remove the file completely.
- */
-
-
-body {
+/* body {
 	background-color: black;
-}
+} */
 
 .rw-blocks-slideshow {
 	max-width: 100vw;
@@ -16,13 +8,15 @@ body {
 	position: relative;
 	margin: 0;
 	overflow: hidden;
+	display: block;
 	--sld-aw: 100%;
 	--sld-ah: 100%;
 	--sld-bw: max-content;
 	--sld-bh: 100%;
 	--sld-cw: 100%;
 	--sld-ch: 100%;
-/* 	--sld-nw: 100%;
+
+	/* 	--sld-nw: 100%;
 	--sld-nh: 100%;
 	--sld-pw: 100%;
 	--sld-ph: 100%;
@@ -45,6 +39,7 @@ body {
 		justify-content: start;
 		scroll-behavior: smooth;
 		margin: auto;
+		align-items: center;
 
 		.slide {
 			width: var(--sld-bw);

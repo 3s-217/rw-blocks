@@ -1,5 +1,12 @@
 .rw-blocks-slideshow.abs {
 	.slide {
+		transform: scale(0);
+		margin: 0 auto;
+		transition: transform 1s;
+		transform-origin: top center;
+		position: absolute;
+		top: 0;
+		left: 0;
 		&.act {
 			transform: scale(1);
 			transform-origin: bottom center;
@@ -106,7 +113,7 @@
 	}
 }
 
-.slide1 {
+.timeline {
 	color: white;
 	transform: scale(0);
 	margin: 0 auto;
@@ -118,7 +125,8 @@
 	top: 0;
 	left: 0;
 
-	.slide-content {
+	.slide-content,
+	.timeline-content {
 		height: calc(100% - 100px);
 		width: 100%;
 	}

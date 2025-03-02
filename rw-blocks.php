@@ -2,10 +2,10 @@
 
 /**
  * Plugin Name:       Rw Blocks
- * Description:       A set of customizable blocks for slideshow & svg handling.
+ * Description:       A set of customizable blocks for slideshow, animated counter.
  * Requires at least: 6.6
  * Requires PHP:      7.2
- * Version:           0.1.3
+ * Version:           0.1.7
  * Author:            The WordPress Contributors
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
@@ -18,7 +18,7 @@ if (! defined('ABSPATH')) {
 	exit; // Exit if accessed directly.
 }
 $CAT = "rw-blocks";
-$BLOCKS = array('world-map', 'slideshow'/* , 'slide' */);
+$BLOCKS = array('world-map', 'slideshow', 'counter');
 $RW_BLOCKS = array();
 $Themes = array();
 
@@ -122,7 +122,7 @@ add_action('wp_head', 'append_styles');
 if (!function_exists('add_inline_script_to_coreWeb')) {
 	function add_inline_script_to_coreWeb() {
 		// Path to the library file
-		$lib_file_path = plugin_dir_path(__FILE__) . 'assets/core-min.js';
+		$lib_file_path = plugin_dir_path(__FILE__) . 'includes/core-min.js';
 
 		// Read the file contents
 		if (file_exists($lib_file_path)) {
