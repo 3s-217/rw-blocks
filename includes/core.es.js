@@ -354,7 +354,7 @@ const vdom = async (rt) => {
         //data-|aria-|
         const pt = /^([a-z]+(?:[A-Z][a-z]+)+|value|checked|disabled|readonly|style)$/;
         //===================================
-        const [fevts, fattr, fprop, fcss, ecss] = Array(5).fill(Map);
+        const [fevts, fattr, fprop, fcss, ecss] = Array(5).fill().map(v=>new Map());
         tcss(rEl.style.cssText, ecss);
         //====================================
         each(vEl.props, 'e', ([k, v]) => {
@@ -715,16 +715,16 @@ let __o$1=class __o {
         return x;
     }
     qyp(s, e = document) {
-        let el = this.gt.parentNode;
+        let el = this.gt?.parentNode;
         const rs = () => {
-            let m = el.matches(s);
-            if (!el || (el === e && !m)) return null;
-            if (m) return el;
-            el = el.parentNode;
-            return rs();
+            if (typeof el?.matches !== "function") return null;
+            let m = el?.matches(s);
+            return (!el || (el === e && !m)) ? null :
+                m ? el :
+                    (el = el.parentNode, rs());
         };
         const f = rs();
-        this.#El = (f) ? f : null;
+        this.#El = f ?? null;
         return this;
     }
     /**
