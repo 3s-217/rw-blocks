@@ -108,6 +108,18 @@ registerBlockType(metadata.name, {
 		save: (props) => <RwCounter {...props} old={1} />,
 	}]
 });
+/**
+ * A stateless functional component to render the RwCounter block.
+ * @param {object} props - Component props.
+ * @param {object} props.attributes - Block attributes.
+ * @param {object} props.attributes.attr - HTML attributes.
+ * @param {object} props.attributes.css - CSS styles.
+ * @param {number} props.attributes.min - Minimum value.
+ * @param {number} props.attributes.max - Maximum value.
+ * @param {string} props.attributes.sym - Symbol to append to the value.
+ * @param {boolean} props.edit - Whether the block is being edited.
+ * @returns {object} - A JSX element.
+ */
 function RwCounter(props) {
 	const { attributes: a, edit } = props;
 	const { attr, css, min, max, sym } = a;

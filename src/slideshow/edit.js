@@ -191,6 +191,17 @@ function SldOpt(props) {
 		</>
 	);
 }
+/**
+ * SldTxtOpt is a React component that renders controls for editing the text options of a slide.
+ * It includes a text control for specifying the type of HTML element to wrap around the text,
+ * along with additional components for managing comments, import/export options, and advanced settings.
+ * 
+ * @param {Object} props - The properties passed to the component.
+ * @param {Object} props.attributes - The attributes of the slide block.
+ * @param {Function} props.setAttributes - Function to update the block attributes.
+ * @returns {JSX.Element} The rendered component.
+ */
+
 function SldTxtOpt(props) {
 	const { attributes: a, setAttributes: sattr } = props;
 	const ext = (t, n) => ({ title: t, name: n, sattr, attr: a, key: 1 });
@@ -214,6 +225,21 @@ function SldTxtOpt(props) {
 		</OptI>
 	);
 }
+/**
+ * Renders the options panel for the RwAny block, allowing customization of attributes and behavior.
+ *
+ * @param {Object} props - The properties passed to the component.
+ * @param {Object} props.attributes - The attributes of the RwAny block.
+ * @param {Function} props.setAttributes - Function to update the block's attributes.
+ * @param {...*} args - Additional arguments.
+ *
+ * @description This component provides an options interface to configure the RwAny block,
+ * including type selection, content wrapping, and advanced settings. It includes warnings 
+ * about the potential risks of editing if the block type is 'script' or 'style', as no safeguards
+ * are in place. When "Contents as text" is enabled, it wraps contents in HTML tags using the 
+ * provided type. When "Just text" is enabled, it returns only text without HTML tags.
+ */
+
 function RwAnyOpt(props, ...args) {
 	const { attributes: a, setAttributes: sattr } = props;
 	const ext = (t, n) => ({ title: t, name: n, sattr, attr: a, key: ['css', 'attr'] });
@@ -289,6 +315,12 @@ function PanelImEx(props) {
 		</div>
 	</PanelBody>;
 }
+/**
+ * Import block config from json
+ * @param {string} json - json string to be parsed as block config
+ * @param {object} props - props of the block
+ * @param {function} props.setAttributes - function to set attributes of the block
+ */
 function importBlockConf(json, props) {
 	const { setAttributes: s } = props;
 	let pr;
@@ -366,12 +398,28 @@ function ExtAdv({ tabs }) {
 		<TabPanel tabs={tabs} children={exTabs} />
 	</PanelBody>;
 }
+
+/**
+ * @function
+ * @param {Object} props
+ * @prop {String} name
+ * @prop {String} title
+ * @prop {Object} attr
+ * @prop {Function} sattr
+ * @prop {String} [ky=""]
+ * @prop {String} [key]
+ * @returns {JSX.Element}
+ * @description
+ * This component is used to generate a TabPanel with two tabs.
+ * The first tab is for setting the styles of the component,
+ * the second tab is for setting the attributes of the component.
+ */
 function exTabs({ name, title, attr, sattr, ky = "", key }) {
 	return (
 		<Panel>
 			{
 				[
-					["Styles", "Set css using JS Api name", "Css"],
+					["Styles", "Set css using JS Api name react props", "Css"],
 					["Attributes", "!! Set React props there is no safeguard !!", "Attr"]
 				].map((v, i) => (
 					<PanelBody title={v[0]} initialOpen={!!0} key={i}>

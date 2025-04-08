@@ -164,6 +164,88 @@ function SldShwTxt(props) {
 		</Cel>
 	);
 }
+/**
+ * @typedef {import('@wordpress/element').WPComponent} WPComponent
+ * @typedef {import('@wordpress/block-editor').BlockEditProps} BlockEditProps
+ * @typedef {import('@wordpress/block-editor').BlockSaveProps} BlockSaveProps
+ * @typedef {import('@wordpress/data').DispatchFromMap} DispatchFromMap
+ * @typedef {import('@wordpress/data').SelectFromMap} SelectFromMap
+ * @typedef {Object<string,any>} Attributes
+ * @typedef {Object<string,any>} CSS
+ * @typedef {Object<string,any>} Attr
+ *
+ * @param {BlockEditProps|BlockSaveProps} props
+ * @property {Attributes} attributes
+ * @property {DispatchFromMap} setAttributes
+ * @property {boolean} edit
+ * @property {Object<string, any>} blockProps
+ * @property {string} text
+ * @property {Attr} attr
+ * @property {CSS} css
+ * @property {string} type
+ * @property {boolean} txt
+ *
+ * @returns {WPComponent}
+ *
+ * @description
+ * This function renders a generic element with the given attributes.
+ * It accepts a type attribute to render the element with a different tag name.
+ * The element is rendered with the class name "rwAny".
+ * When the type attribute is set to "script" or "style", the element's innerHTML is set to the text attribute.
+ * Otherwise, the element is rendered as a RichText or InnerBlocks element, depending on the txt attribute.
+ * If the txt attribute is true, the element is rendered as a RichText element.
+ * If the txt attribute is false, the element is rendered as an InnerBlocks element.
+ * The element is rendered with the given CSS and attributes.
+ * The element is rendered with the given blockProps.
+ *
+ * @example
+ *
+ * <RwAny
+ * 	type="div"
+ * 	text="Hello World!"
+ * 	attr={{ className: "my-class" }}
+ * 	css={{ color: "red" }}
+ * />
+ *
+ * @example
+ *
+ * <RwAny
+ * 	type="script"
+ * 	text="console.log('Hello World!');"
+ * />
+ *
+ * @example
+ *
+ * <RwAny
+ * 	type="style"
+ * 	text=".my-class { color: red; }"
+ * />
+ *
+ * @example
+ *
+ * <RwAny
+ * 	type="div"
+ * 	txt={true}
+ * 	attr={{ className: "my-class" }}
+ * 	css={{ color: "red" }}
+ * >
+ * 	<p>Hello World!</p>
+ * </RwAny>
+ *
+ * @example
+ *
+ * <RwAny
+ * 	type="div"
+ * 	txt={false}
+ * 	attr={{ className: "my-class" }}
+ * 	css={{ color: "red" }}
+ * >
+ * 	<RwAny
+ * 		type="p"
+ * 		text="Hello World!"
+ * 	/>
+ * </RwAny>
+ */
 function RwAny(props) {
 	const { attributes: a, edit, setAttributes: sattr } = props;
 	const blockProps = edit ? useBlockProps() : useBlockProps.save();

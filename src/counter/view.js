@@ -16,13 +16,14 @@ class rwCounter {
             //__o.log('run', utype(Io, 'obj'), Io.iR > 0.9, Io.dir, m != NaN, m != NaN);
             if (m != NaN && m != NaN && Io.dir === 0) {
                 //__o.log('counterAnima', rt, n, m, a.sym, a.tm);
-                counterIncreaseAnimation(rt, n, m, a.sym, 0, 1e3);
+                countAnima(rt, n, m, a.sym, 0, 1e3);
             }
         }
     };
     static init() {
-        const tln = _c(document).all(".rw-blocks-counter");
-        for (let j = 0; j < tln.length; j++) new rwCounter(tln[j], j);
+        _c(document)
+            .all(".rw-blocks-counter")
+            .forEach((v, i) => new rwCounter(v, i));
     }
 }
 function OBS(et) {
@@ -60,22 +61,22 @@ const observer = __o.mkObs(0, OBS, {
 _ui.obs = observer;
 _c(document).on("DOMContentLoaded", rwCounter.init);
 _ui.rwCounter = rwCounter;
-function counterIncreaseAnimation(el, start, end, sym, step, dur = 1e2, lfps = false) {
+function countAnima(el, start, end, sym, step, dur = 1e2, lfps = false) {
     let c = start;
     //onst totalFrames = dur / 16; // 16ms = 60fps
     //const increment = Math.abs((end - start) / totalFrames);
     const inc = start < end;
     let stm = null;
     let ltm = null;
-    const isInt = __o.utils.type(start, 'int') && __o.utils.type(end, 'int');
+    const isInt = utype(start, 'int') && utype(end, 'int');
     //__o.log(c, increment, start, end, el);
     const animate = (tm) => {
         stm ??= tm;
         const elapsed = tm - stm;
         const prog = Math.min(elapsed / dur, 1);
-        c = inc
-            ? start + (end - start) * prog
-            : start - (start - end) * prog;
+        c = (inc
+            ? start + (end - start)
+            : start - (start - end)) * prog;
         if (lfps && ltm)
             __o.log(`FPS: ${(1000 / (tm - ltm)).toFixed(2)}`);
         ltm = tm;
@@ -89,4 +90,4 @@ function counterIncreaseAnimation(el, start, end, sym, step, dur = 1e2, lfps = f
 }
 
 //animateCounter(0, 100, 2000);
-/* $thrive$ mountain east raw unusual another chimney census scene extra mom boil */
+/*  */
